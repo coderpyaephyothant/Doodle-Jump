@@ -12,8 +12,9 @@ document.addEventListener('DOMContentLoaded', ()=>{
     let isJumping = false;
     let isMovingLeft = true;
     let isMovingRight = true;
-    let leftTimerId
-    let RightTimerId
+    let leftTimerId;
+    let RightTimerId;
+    let score = 0;
 
 
     function createDoodler () {
@@ -23,17 +24,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
         doodler.style.left = doodlerLeftSpace + 'px '
         doodler.style.bottom = doodlerBottomSpace + 'px'
     }
-
+    // javascript class for grid and creating platforms....
     class Platform {
         constructor (newPlatBottom){
             this.bottom = newPlatBottom;
             this.left = Math.random() * 315; // grid width px  - platform width px   
             this.visual = document.createElement ('div') 
             
-            const visual = this.visual;
+            const visual = this.visual; //div
             visual.classList.add('platform');
-            visual.style.left= this.left + 'px';
-            visual.style.bottom = this.bottom + 'px';
+            visual.style.left= this.left + 'px'; // adding pixel unit
+            visual.style.bottom = this.bottom + 'px'; // adding pixel unit
             grid.appendChild(visual);
          }
     }
@@ -60,7 +61,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
                     let firstVisualPlatform = platforms[0].visual;
                     firstVisualPlatform.classList.remove('platform');
                     platforms.shift();
-                    console.log('platforms');
+                    score  ++ ;
+                    console.log(platforms);
                     let newPlatform = new Platform (600);
                     platforms.push(newPlatform);
 
@@ -116,10 +118,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
    
     function gameOver () {
         console.log('Game Over');
+        while (grid.firstElementChild){
+            console.log(grid.childNodes[0])
+            grid.removeChild(grid.childNodes[0]);
+        }
+        const scorediv = document.createElement('div');
+        scorediv.innerHTML= 'Your Score : ' + score  ;
+        grid.appendChild(scorediv)
         
         isGameOver= true;
         clearInterval(upTimerId);
         clearInterval(downTimerId);
+        clearInterval(leftTimerId);
+        clearInterval(RightTimerId);
         
     }
 
