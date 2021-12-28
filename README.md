@@ -1,6 +1,7 @@
 # Doodle-Jump
 my first game project with freecode camp
-" 
+
+<
 - addEventListener
 -createElement
 -class
@@ -28,4 +29,5 @@ shift()
 -Increment Operators
 -&&
 -Math.random
-clg
+clg 
+>
